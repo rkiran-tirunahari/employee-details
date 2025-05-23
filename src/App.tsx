@@ -5,9 +5,17 @@ import HorizontalMenu from './components/HorizontalMenu';
 import EmployeeGrid from './components/EmployeeGrid';
 import EmployeeTileView from './components/EmployeeTileView';
 import { Button, Container, Box, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import Login from './components/Login';
+
 
 function App() {
   const [view, setView] = useState<'grid' | 'tile'>('grid');
+
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
+
+  if (!isLoggedIn) {
+    return <Login onLogin={() => setIsLoggedIn(true)} />;
+  }
 
   return (
     <div className="App">
