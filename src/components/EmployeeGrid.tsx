@@ -169,7 +169,7 @@ export default function EmployeeGrid() {
         <Button
           variant="contained"
           color="primary"
-          onClick={handleOpenAdd}
+          
           sx={{ borderRadius: 3, boxShadow: 2, fontWeight: 600 }}
         >
           Add Employee
@@ -220,7 +220,6 @@ export default function EmployeeGrid() {
                   <Button
                     variant="outlined"
                     size="small"
-                    onClick={() => handleOpenEdit(emp)}
                     sx={{
                       borderRadius: 2,
                       textTransform: 'none',

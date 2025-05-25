@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import HamburgerMenu from './components/HamburgerMenu';
 import HorizontalMenu from './components/HorizontalMenu';
@@ -6,32 +6,35 @@ import EmployeeGrid from './components/EmployeeGrid';
 import EmployeeTileView from './components/EmployeeTileView';
 import { Button, Container, Box, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import Login from './components/Login';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, login, logout, setView } from './store';
 
 
 function App() {
-  const [view, setView] = useState<'grid' | 'tile'>('grid');
+  const view = useSelector((state: RootState) => state.view.view);
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    dispatch(logout());
+  };
 
   if (!isLoggedIn) {
-    return <Login onLogin={() => setIsLoggedIn(true)} />;
+    return <Login onLogin={() => dispatch(login())} />;
   }
 
   return (
     <div className="App">
+    
+      <HorizontalMenu onLogout={handleLogout} />
       
-       <Box sx={{ display: 'flex', alignItems: 'center', pl: 2, pt: 2 }}>
-        <HamburgerMenu />
-      </Box>
-
-      <HorizontalMenu />
-      
-       <Container maxWidth="lg" style={{ marginTop: 32 }}>
+      <Container maxWidth="lg" style={{ marginTop: 32 }}>
         <Box display="flex" justifyContent="flex-end" mb={2}>
           <ToggleButtonGroup
             value={view}
             exclusive
-            onChange={(_, val) => val && setView(val)}
+            onChange={(_, val) => val && dispatch(setView(val))}
             aria-label="view switch"
             sx={{
               background: '#f4f6fa',

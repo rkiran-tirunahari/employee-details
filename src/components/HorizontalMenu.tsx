@@ -3,12 +3,11 @@ import { AppBar, Toolbar, Button } from '@mui/material';
 
 const menuItems = ['Home', 'Employees', 'Departments', 'Reports', 'Settings'];
 
-export default function HorizontalMenu() {
+export default function HorizontalMenu({ onLogout }: { onLogout?: () => void }) {
   const [selected, setSelected] = useState('Home');
 
   return (
-    
-     <AppBar
+    <AppBar
       position="static"
       color="default"
       elevation={2}
@@ -48,6 +47,16 @@ export default function HorizontalMenu() {
             {item}
           </Button>
         ))}
+        {onLogout && (
+          <Button
+            color="secondary"
+            variant="outlined"
+            sx={{ ml: 4, fontWeight: 600, borderRadius: 2 }}
+            onClick={onLogout}
+          >
+            Logout
+          </Button>
+        )}
       </Toolbar>
     </AppBar>
   );
