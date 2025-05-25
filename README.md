@@ -11,8 +11,8 @@ Function Details:
   
 Technical Details:
 
-React + Redux <br> 
-Authentication using JWTToken<br> 
-Pagination<br> 
-material UI for styles.<br> 
-GraphQl query to fetch data from API.<br> 
+- React + Redux <br> 
+- Authentication using JWTToken<br> 
+- Pagination<br> 
+- material UI for styles.<br> 
+- GraphQl query to fetch data from API.<br> 
